@@ -5,3 +5,7 @@ __pycache__/
 .env
 dist/
 build/
+
+# Temporary material downloads
+*.part
+datasets/.download-parts/
