@@ -5,6 +5,9 @@ mathjax: true
 permalink: /assignments2025/assignment3/
 ---
 
+> 本地学习补充（2026-10-28）：解压后的 Notebook 已替换 Colab 初始化。请按 [本地实验与存储管理](../docs/本地实验与存储管理.md) 运行；下文保留官方历史说明，不需要照做 Drive 挂载或云端提交。
+
+
 <span style="color:red">This assignment is due on **Friday, May 30 2025** at 11:59pm PST.</span>
 
 Starter code containing Colab notebooks can be [downloaded here]({{site.hw_3_colab}}).

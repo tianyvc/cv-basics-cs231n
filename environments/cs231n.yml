@@ -1,0 +1,21 @@
+# Base for A1 and theory exercises. PyTorch/A3 dependencies are installed on demand.
+name: cs231n
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - numpy>=1.26,<3
+  - scipy
+  - matplotlib
+  - pillow
+  - imageio
+  - future
+  - six
+  - h5py
+  - cython
+  - setuptools
+  - jupyterlab
+  - ipykernel
+  - ipywidgets
+  - scikit-learn

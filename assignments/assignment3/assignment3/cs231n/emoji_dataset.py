@@ -7,7 +7,6 @@ from torchvision import transforms as T
 import joblib
 
 
-import clip
 from tqdm.auto import tqdm
 
 
@@ -28,13 +27,15 @@ def get_text_augs():
 
 
 class ClipEmbed:
-    def __init__(self, device):
-        self.model, self.preprocess = clip.load("ViT-B/32", device=device)
+    def __init__(self, device, download=False):
+        from local_runtime import load_clip
+        self.model, self.preprocess = load_clip(device, allow_download=download)
         self.model = self.model.eval()
         self.device = device
 
     def embed(self, text):
         with torch.inference_mode():
+            import clip
             text = clip.tokenize(text).to(self.device)
             text_emb = self.model.encode_text(text)[0].cpu()
         return text_emb
@@ -45,7 +46,7 @@ class TextEmbedder:
         self.loaded = None
 
     def load_processed(self, data_path):
-        self.loaded = torch.load(data_path)
+        self.loaded = torch.load(data_path, map_location="cpu", weights_only=True)
 
     def save_processed(self, all_texts, path):
         assert not os.path.exists(path)
@@ -106,29 +107,24 @@ class TextEmbedder:
 
 
 def download_data(fpath):
-    if not os.path.exists(fpath):
-        print(f"Downloading...{fpath}")
-        import urllib.request
-        fname = os.path.basename(fpath)
-        url = f"http://cs231n.stanford.edu/2025/storage/a3/{fname}"
-        urllib.request.urlretrieve(url, fpath)
-        print("Download complete.")
-    else:
-        fname = os.path.basename(fpath)
-        print(f"{fname} already downloaded.")
+    """Local mode: check only. Downloads require an explicit terminal command."""
+    if not os.path.isfile(fpath):
+        name = "emoji" if fpath.endswith("emoji_data.npz") else "text-embeddings"
+        raise FileNotFoundError(f"缺少 {fpath}。在仓库根执行：python tools/local_resources.py fetch {name}")
 
 
 class EmojiDataset(Dataset):
     def __init__(
         self,
         image_size,
-        data_path="data/emoji_data.npz",
-        text_emb_path="data/text_embeddings.pt",
+        data_path=None,
+        text_emb_path=None,
         num_text_emb_pca=None,
     ):
         
-        data_path = os.path.join(os.path.dirname(__file__), "datasets/emoji_data.npz")
-        text_emb_path = os.path.join(os.path.dirname(__file__), "datasets/text_embeddings.pt")
+        shared = os.environ.get("CS231N_DATA_DIR", os.path.join(os.path.dirname(__file__), "datasets"))
+        data_path = data_path or os.path.join(shared, "emoji_data.npz")
+        text_emb_path = text_emb_path or os.path.join(os.path.dirname(__file__), "datasets/text_embeddings.pt")
         download_data(data_path)
         download_data(text_emb_path)
 

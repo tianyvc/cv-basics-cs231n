@@ -9,3 +9,16 @@ build/
 # Temporary material downloads
 *.part
 datasets/.download-parts/
+
+# Local learning datasets/model caches (keep curated tracked materials)
+/datasets/**
+!/datasets/imagenet_val_25.npz
+/models/
+/cache/
+**/.ipynb_checkpoints/
+assignments/**/results/
+assignments/**/pretrained_model/*.pth
+assignments/**/cs231n/exp/
+assignments/**/cs231n/datasets/cifar-10-batches-py
+assignments/**/cs231n/datasets/coco_captioning
+assignments/**/cs231n/datasets/imagenet_val_25.npz

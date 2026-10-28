@@ -32,14 +32,7 @@ def tasks(include_data=False):
         if not ref.endswith('.html'):
             add('readings/notes'+ref,'https://cs231n.github.io'+ref,'note_asset')
     if include_data:
-        base='assignments/assignment3/assignment3/'
-        for fname in ['emoji_data.npz','text_embeddings.pt']:
-            add(base+'cs231n/datasets/'+fname,'https://cs231n.stanford.edu/2025/storage/a3/'+fname,'data')
-        add(base+'pretrained_model/pretrained_simclr_model.pth','https://cs231n.stanford.edu/2025/storage/a3/pretrained_simclr_model.pth','data')
-        add(base+'cs231n/exp/pretrained/model-70000.pt','https://cs231n.stanford.edu/2025/storage/a3/model-70000.pt','data')
-        add('datasets/cifar-10-python.tar.gz','https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz','data')
-        add('datasets/coco_captioning.zip','https://cs231n.stanford.edu/coco_captioning.zip','data')
-        add('datasets/imagenet_val_25.npz','https://cs231n.stanford.edu/imagenet_val_25.npz','data')
+        raise ValueError("本地作业数据改用：python tools/local_resources.py fetch <资源名>；此脚本仅维护阅读资料。")
     return out
 
 def download(t):
@@ -65,6 +58,8 @@ def download(t):
 
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--data',action='store_true');ap.add_argument('--retry-deferred',action='store_true');ap.add_argument('--only',help='Download only a path containing this string');args=ap.parse_args()
+    if args.data:
+        ap.error('请用 python tools/local_resources.py fetch <资源名>，避免旧路径重复下载。')
     old={r['path']:r for r in json.loads(P.read_text())} if P.exists() else {}
     selected=[t for t in tasks(args.data) if (not args.only or args.only in t[0]) and (args.retry_deferred or old.get(t[0],{}).get('status')!='deferred')]
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:

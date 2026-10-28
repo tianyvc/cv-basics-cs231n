@@ -13,7 +13,7 @@ def main():
  for r in manifest:
   if r['status']=='ok':
    p=ROOT/r['path']
-   if not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest()!=r['sha256']:errors.append(r['path'])
+   if not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest()!=r.get('local_sha256',r['sha256']):errors.append(r['path'])
  slides=list((ROOT/'slides').rglob('*.pdf'))
  notebooks=list((ROOT/'assignments').rglob('*.ipynb'))
  for p in notebooks:json.loads(p.read_text())
@@ -28,19 +28,20 @@ def main():
  for p in (ROOT/'readings/notes').glob('*.md'):
   for ref in re.findall(r'(?:src=[\"\']|\]\()(assets/[^\"\'\s\)<>]+)',p.read_text()):
    if not (p.parent/ref).exists():assets.append((p.name,ref))
- lines=['# 资料审计与完整文件目录','', '核查日期：2026-10-19。运行 `python tools/audit_repository.py` 可更新本页；本次为静态结构与文件完整性检查，未执行未完成的作业、训练模型或隐藏评分。','',
+ lines=['# 资料审计与完整文件目录','', '资料来源核查：2026-10-19；本地运行改造核查：2026-10-28。运行 `python tools/audit_repository.py` 可更新本页；本次为静态结构与文件完整性检查，未执行未完成的作业、训练模型或隐藏评分。','',
  f'扫描得到 {len(files)} 个普通文件（不含 Git、环境配置、虚拟环境、Python 缓存和下载分片），{len(dirs)} 个目录；幻灯片 PDF {len(slides)} 份，作业 Notebook {len(notebooks)} 本（核心练习 14 本，提交工具 3 本）。', '',
  f'下载清单共 {len(manifest)} 项，成功 {sum(r["status"]=="ok" for r in manifest)} 项；延后下载 {sum(r["status"]=="deferred" for r in manifest)} 项，失败 {sum(r["status"]=="failed" for r in manifest)} 项。成功项 SHA-256 复核异常：{len(errors)}；原始 ZIP 有效条目缺失：{len(zipmissing)}；笔记本地图片缺失：{len(assets)}。','',
  '## 仍需区分的内容','',
  '- 2025 官网第 18 讲没有公开 slides 链接；2024 第 18 讲仅作历史补充。',
  '- Canvas 2025 视频需要课程权限；Ed、Gradescope 批改和隐藏测试不在公开存档内。',
  '- 网页快照未镜像全部图片、脚本、字体、视频；课件内外部视频也未镜像。',
- '- CLIP、DINO 权重与 torch.hub 代码、DAVIS 的 tensorflow-datasets 缓存尚需按 Notebook 首次联网获取。',
- '- 未安装/锁定作业的完整运行环境，未完成题目 TODO；训练产物、最终项目应由学习者产生。','',
+ '- CLIP、DINO 与 DAVIS 首次获取由 Notebook 显式开关控制，默认不下载，集中在 cache/。',
+ '- 已测试本地初始化、资源工具和 A1 导入；尚未安装完整 A3/GPU 环境，未执行未完成题目。','',
  '## 本次补充与修复','',
- '- 从已有 ZIP 恢复 5 份包初始化文件及 A1 的 saved/keep.md，未覆盖已有源码和 Notebook。',
+ '- 首次从 ZIP 恢复初始化文件；后续在解压目录改造本地初始化与路径，原 ZIP 保留上游版本。',
  '- 下载官网项目规范、讨论课、Efficient BackProp、辅助论文、外部阅读及笔记插图。',
  '- 笔记图片改为相对路径；两个交互演示保留官网地址。',
+ '- 新增本地资源管理：共享数据、按需下载、归档校验和默认只预览的清理；来源哈希与本地修改哈希分开记录。',
  '- 已按用户要求停止大文件下载并清理约 176 MiB 临时分片。未下载资源的用途、获取和操作见 [按需资源指南](未下载资源与按需获取指南.md)。','',
  '## 下载状态与来源','', '| 路径 | 状态 | 大小 | 来源 / 失败原因 |','|---|---|---:|---|']
  for r in manifest:

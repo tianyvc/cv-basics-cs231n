@@ -1,9 +1,10 @@
+ 
+
 ---
 layout: page
 title: Python Numpy Tutorial (with Jupyter and Colab)
 permalink: /python-numpy-tutorial/
 ---
-
 <div>
   <a href="https://colab.research.google.com/github/cs231n/cs231n.github.io/blob/master/python-colab.ipynb" target="_blank">
     <img class="colab-badge" src="assets/badges/colab-open.svg" alt="Colab Notebook"/>
@@ -26,7 +27,6 @@ different language, in which case we also recommend referencing:
 [NumPy for Matlab users](https://numpy.org/doc/stable/user/numpy-for-matlab-users.html),
 [Python for R users](http://www.data-analysis-in-python.org/python_for_r.html), and/or
 [Python for SAS users](https://nbviewer.jupyter.org/github/RandyBetancourt/PythonForSASUsers/tree/master/).
-
 
 **Table of Contents**
 
@@ -111,6 +111,7 @@ print(quicksort([3,6,8,10,1,2,1]))
 ```
 
 ### Python versions
+
 As of Janurary 1, 2020, Python has [officially dropped support](https://www.python.org/doc/sunset-python-2/) for `python2`.
 **For this class all code will use Python 3.7**. Ensure you have gone through the [setup instructions](setup.md)
 and correctly installed a `python3` virtual environment before proceeding with this tutorial.
@@ -143,6 +144,7 @@ y = 2.5
 print(type(y)) # Prints "<class 'float'>"
 print(y, y + 1, y * 2, y ** 2) # Prints "2.5 3.5 5.0 6.25"
 ```
+
 Note that unlike many languages, Python does not have unary increment (`x++`)
 or decrement (`x--`) operators.
 
@@ -188,16 +190,19 @@ print(s.replace('l', '(ell)'))  # Replace all instances of one substring with an
                                 # prints "he(ell)(ell)o"
 print('  world '.strip())  # Strip leading and trailing whitespace; prints "world"
 ```
+
 You can find a list of all string methods [in the documentation](https://docs.python.org/3.5/library/stdtypes.html#string-methods).
 
 <a name='python-containers'></a>
 
 ### Containers
+
 Python includes several built-in container types: lists, dictionaries, sets, and tuples.
 
 <a name='python-lists'></a>
 
 #### Lists
+
 A list is the Python equivalent of an array, but is resizeable
 and can contain elements of different types:
 
@@ -212,6 +217,7 @@ print(xs)         # Prints "[3, 1, 'foo', 'bar']"
 x = xs.pop()      # Remove and return the last element of the list
 print(x, xs)      # Prints "bar [3, 1, 'foo']"
 ```
+
 As usual, you can find all the gory details about lists
 [in the documentation](https://docs.python.org/3.5/tutorial/datastructures.html#more-on-lists).
 
@@ -230,6 +236,7 @@ print(nums[:-1])          # Slice indices can be negative; prints "[0, 1, 2, 3]"
 nums[2:4] = [8, 9]        # Assign a new sublist to a slice
 print(nums)               # Prints "[0, 1, 8, 9, 4]"
 ```
+
 We will see slicing again in the context of numpy arrays.
 
 **Loops:** You can loop over the elements of a list like this:
@@ -282,6 +289,7 @@ print(even_squares)  # Prints "[0, 4, 16]"
 <a name='python-dicts'></a>
 
 #### Dictionaries
+
 A dictionary stores (key, value) pairs, similar to a `Map` in Java or
 an object in Javascript. You can use it like this:
 
@@ -297,6 +305,7 @@ print(d.get('fish', 'N/A'))    # Get an element with a default; prints "wet"
 del d['fish']         # Remove an element from a dictionary
 print(d.get('fish', 'N/A')) # "fish" is no longer a key; prints "N/A"
 ```
+
 You can find all you need to know about dictionaries
 [in the documentation](https://docs.python.org/3.5/library/stdtypes.html#dict).
 
@@ -332,6 +341,7 @@ print(even_num_to_square)  # Prints "{0: 0, 2: 4, 4: 16}"
 <a name='python-sets'></a>
 
 #### Sets
+
 A set is an unordered collection of distinct elements. As a simple example, consider
 the following:
 
@@ -350,7 +360,6 @@ print(len(animals))       # Prints "2"
 
 As usual, everything you want to know about sets can be found
 [in the documentation](https://docs.python.org/3.5/library/stdtypes.html#set).
-
 
 **Loops:**
 Iterating over a set has the same syntax as iterating over a list;
@@ -376,6 +385,7 @@ print(nums)  # Prints "{0, 1, 2, 3, 4, 5}"
 <a name='python-tuples'></a>
 
 #### Tuples
+
 A tuple is an (immutable) ordered list of values.
 A tuple is in many ways similar to a list; one of the most important differences is that
 tuples can be used as keys in dictionaries and as elements of sets, while lists cannot.
@@ -388,11 +398,13 @@ print(type(t))    # Prints "<class 'tuple'>"
 print(d[t])       # Prints "5"
 print(d[(1, 2)])  # Prints "1"
 ```
+
 [The documentation](https://docs.python.org/3.5/tutorial/datastructures.html#tuples-and-sequences) has more information about tuples.
 
 <a name='python-functions'></a>
 
 ### Functions
+
 Python functions are defined using the `def` keyword. For example:
 
 ```python
@@ -421,6 +433,7 @@ def hello(name, loud=False):
 hello('Bob') # Prints "Hello, Bob"
 hello('Fred', loud=True)  # Prints "HELLO, FRED!"
 ```
+
 There is a lot more information about Python functions
 [in the documentation](https://docs.python.org/3.5/tutorial/controlflow.html#defining-functions).
 
@@ -448,6 +461,7 @@ g = Greeter('Fred')  # Construct an instance of the Greeter class
 g.greet()            # Call an instance method; prints "Hello, Fred"
 g.greet(loud=True)   # Call an instance method; prints "HELLO, FRED!"
 ```
+
 You can read a lot more about Python classes
 [in the documentation](https://docs.python.org/3.5/tutorial/classes.html).
 
@@ -463,6 +477,7 @@ arrays. If you are already familiar with MATLAB, you might find
 <a name='numpy-arrays'></a>
 
 ### Arrays
+
 A numpy array is a grid of values, all of the same type, and is indexed by a tuple of
 nonnegative integers. The number of dimensions is the *rank* of the array; the *shape*
 of an array is a tuple of integers giving the size of the array along each dimension.
@@ -509,12 +524,14 @@ e = np.random.random((2,2))  # Create an array filled with random values
 print(e)                     # Might print "[[ 0.91940167  0.08143941]
                              #               [ 0.68744134  0.87236687]]"
 ```
+
 You can read about other methods of array creation
 [in the documentation](http://docs.scipy.org/doc/numpy/user/basics.creation.html#arrays-creation).
 
 <a name='numpy-array-indexing'></a>
 
 ### Array indexing
+
 Numpy offers several ways to index into arrays.
 
 **Slicing:**
@@ -666,6 +683,7 @@ if you want to know more you should
 <a name='numpy-datatypes'></a>
 
 ### Datatypes
+
 Every numpy array is a grid of elements of the same type.
 Numpy provides a large set of numeric datatypes that you can use to construct arrays.
 Numpy tries to guess a datatype when you create an array, but functions that construct
@@ -684,12 +702,14 @@ print(x.dtype)             # Prints "float64"
 x = np.array([1, 2], dtype=np.int64)   # Force a particular datatype
 print(x.dtype)                         # Prints "int64"
 ```
+
 You can read all about numpy datatypes
 [in the documentation](http://docs.scipy.org/doc/numpy/reference/arrays.dtypes.html).
 
 <a name='numpy-math'></a>
 
 ### Array math
+
 Basic mathematical functions operate elementwise on arrays, and are available
 both as operator overloads and as functions in the numpy module:
 
@@ -771,6 +791,7 @@ print(np.sum(x))  # Compute sum of all elements; prints "10"
 print(np.sum(x, axis=0))  # Compute sum of each column; prints "[4 6]"
 print(np.sum(x, axis=1))  # Compute sum of each row; prints "[3 7]"
 ```
+
 You can find the full list of mathematical functions provided by numpy
 [in the documentation](http://docs.scipy.org/doc/numpy/reference/routines.math.html).
 
@@ -793,13 +814,14 @@ v = np.array([1,2,3])
 print(v)    # Prints "[1 2 3]"
 print(v.T)  # Prints "[1 2 3]"
 ```
+
 Numpy provides many more functions for manipulating arrays; you can see the full list
 [in the documentation](http://docs.scipy.org/doc/numpy/reference/routines.array-manipulation.html).
-
 
 <a name='numpy-broadcasting'></a>
 
 ### Broadcasting
+
 Broadcasting is a powerful mechanism that allows numpy to work with arrays of different
 shapes when performing arithmetic operations. Frequently we have a smaller array and a
 larger array, and we want to use the smaller array multiple times to perform some operation
@@ -891,7 +913,6 @@ If this explanation does not make sense, try reading the explanation
 [from the documentation](http://docs.scipy.org/doc/numpy/user/basics.broadcasting.html)
 or [this explanation](https://scipy.github.io/old-wiki/pages/EricsBroadcastingDoc).
 
-
 Functions that support broadcasting are known as *universal functions*. You can find
 the list of all universal functions
 [in the documentation](http://docs.scipy.org/doc/numpy/reference/ufuncs.html#available-ufuncs).
@@ -947,6 +968,7 @@ Broadcasting typically makes your code more concise and faster, so you
 should strive to use it where possible.
 
 ### Numpy Documentation
+
 This brief overview has touched on many of the important things that you need to
 know about numpy, but is far from complete. Check out the
 [numpy reference](http://docs.scipy.org/doc/numpy/reference/)
@@ -955,6 +977,7 @@ to find out much more about numpy.
 <a name='scipy'></a>
 
 ## SciPy
+
 Numpy provides a high-performance multidimensional array and basic tools to
 compute with and manipulate these arrays.
 [SciPy](http://docs.scipy.org/doc/scipy/reference/)
@@ -969,6 +992,7 @@ We will highlight some parts of SciPy that you might find useful for this class.
 <a name='scipy-image'></a>
 
 ### Image operations
+
 SciPy provides some basic functions to work with images.
 For example, it has functions to read images from disk into numpy arrays,
 to write numpy arrays to disk as images, and to resize images.
@@ -1008,6 +1032,7 @@ imsave('assets/cat_tinted.jpg', img_tinted)
 <a name='scipy-matlab'></a>
 
 ### MATLAB files
+
 The functions `scipy.io.loadmat` and `scipy.io.savemat` allow you to read and
 write MATLAB files. You can read about them
 [in the documentation](http://docs.scipy.org/doc/scipy/reference/io.html).
@@ -1015,6 +1040,7 @@ write MATLAB files. You can read about them
 <a name='scipy-dist'></a>
 
 ### Distance between points
+
 SciPy defines some useful functions for computing distances between sets of points.
 
 The function `scipy.spatial.distance.pdist` computes the distance between all pairs
@@ -1040,6 +1066,7 @@ print(x)
 d = squareform(pdist(x, 'euclidean'))
 print(d)
 ```
+
 You can read all the details about this function
 [in the documentation](http://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.pdist.html).
 
@@ -1050,6 +1077,7 @@ across two sets of points; you can read about it
 <a name='matplotlib'></a>
 
 ## Matplotlib
+
 [Matplotlib](http://matplotlib.org/) is a plotting library.
 In this section give a brief introduction to the `matplotlib.pyplot` module,
 which provides a plotting system similar to that of MATLAB.
@@ -1057,6 +1085,7 @@ which provides a plotting system similar to that of MATLAB.
 <a name='matplotlib-plotting'></a>
 
 ### Plotting
+
 The most important function in matplotlib is `plot`,
 which allows you to plot 2D data. Here is a simple example:
 
@@ -1100,6 +1129,7 @@ plt.title('Sine and Cosine')
 plt.legend(['Sine', 'Cosine'])
 plt.show()
 ```
+
 <div class='fig figcenter fighighlight'>
   <img src='assets/sine_cosine.png'>
 </div>
@@ -1110,6 +1140,7 @@ You can read much more about the `plot` function
 <a name='matplotlib-subplots'></a>
 
 ### Subplots
+
 You can plot different things in the same figure using the `subplot` function.
 Here is an example:
 
@@ -1149,6 +1180,7 @@ You can read much more about the `subplot` function
 <a name='matplotlib-images'></a>
 
 ### Images
+
 You can use the `imshow` function to show images. Here is an example:
 
 ```python

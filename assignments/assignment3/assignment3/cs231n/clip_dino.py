@@ -1,10 +1,8 @@
-from tensorflow.python.framework.ops import device_v2
 import torch
 import torch.nn as nn
 import numpy as np
 import clip
 from PIL import Image
-import tensorflow_datasets as tfds
 from torchvision import transforms as T
 import cv2
 from tqdm.auto import tqdm
@@ -121,8 +119,10 @@ class CLIPImageRetriever:
 
   
 class DavisDataset:
-    def __init__(self):
-        self.davis = tfds.load('davis/480p', split='validation', as_supervised=False)
+    def __init__(self, data_dir=None, download=False):
+        import tensorflow_datasets as tfds
+        self.davis = tfds.load('davis/480p', split='validation', as_supervised=False,
+                              data_dir=data_dir, download=download)
         self.img_tsfm = T.Compose([
             T.Resize((480, 480)), T.ToTensor(),
             T.Normalize((0.485,0.456,0.406), (0.229,0.224,0.225)),
@@ -131,6 +131,7 @@ class DavisDataset:
       
     def get_sample(self, index):
         assert index < len(self.davis)
+        import tensorflow_datasets as tfds
         ds_iter = iter(tfds.as_numpy(self.davis))
         for i in range(index+1):
             video = next(ds_iter)

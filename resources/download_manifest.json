@@ -87,7 +87,10 @@
     "checked_date": "2026-10-19",
     "status": "ok",
     "bytes": 250873,
-    "sha256": "72865de940333735ff60ac1a2df8df471c05da41429c894b560e876d320103a3"
+    "sha256": "72865de940333735ff60ac1a2df8df471c05da41429c894b560e876d320103a3",
+    "local_sha256": "b225fa6913cf853f4a9554d0b499ed629fbf08080115a24083a93f2be00ff349",
+    "local_modified_date": "2026-10-28",
+    "local_note": "本地数据目录、下载显式开关与依赖安装方式改造；原 sha256 保留来源记录。"
   },
   {
     "path": "slides/2025/section_5_rnn_transformers.ipynb",
@@ -96,7 +99,10 @@
     "checked_date": "2026-10-19",
     "status": "ok",
     "bytes": 688424,
-    "sha256": "51df5d6c6daa2a81fe9346e60c46255a465be88b268b50f80627af00cae40462"
+    "sha256": "51df5d6c6daa2a81fe9346e60c46255a465be88b268b50f80627af00cae40462",
+    "local_sha256": "b30b171f9297bdba827356adab84e2757dc39f735dcb83696e8c6aebc8ca3b31",
+    "local_modified_date": "2026-10-28",
+    "local_note": "本地数据目录、下载显式开关与依赖安装方式改造；原 sha256 保留来源记录。"
   },
   {
     "path": "readings/papers/2020_SimCLR.pdf",

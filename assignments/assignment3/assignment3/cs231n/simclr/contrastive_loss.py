@@ -115,11 +115,12 @@ def compute_sim_matrix(out):
     return sim_matrix
 
 
-def simclr_loss_vectorized(out_left, out_right, tau, device='cuda'):
+def simclr_loss_vectorized(out_left, out_right, tau, device=None):
     """Compute the contrastive loss L over a batch (vectorized version). No loops are allowed.
     
     Inputs and output are the same as in simclr_loss_naive.
     """
+    device = out_left.device if device is None else device
     N = out_left.shape[0]
     
     # Concatenate out_left and out_right into a 2*N x D tensor.
