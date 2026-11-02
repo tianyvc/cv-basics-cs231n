@@ -5,6 +5,8 @@ Stanford CS231n 2025 春季课程资料存档（由李飞飞 Fei-Fei Li 等主�
 
 本目录包含：**Slides 幻灯片**、**Assignments 作业**、**Reading materials 阅读资料（课程笔记 / 讲义 / 论文）**。
 
+阅读课程笔记时，请打开支持数学公式的 Markdown 预览。VS Code 可按 `Ctrl+Shift+V`（并确认设置 `markdown.math.enabled` 已开启）；JupyterLab 可右键 Markdown 文件，选择 **Open With → Markdown Preview**。笔记统一使用 `$...$` 表示行内公式、`$$...$$` 表示独立公式；源码编辑视图会显示这些标记。
+
 > 注：**课程视频**托管在 Stanford Canvas（需 Stanford 账号登录），无法匿名下载，故未包含。
 > 链接：<https://canvas.stanford.edu/courses/205350/external_tools/69960>
 
