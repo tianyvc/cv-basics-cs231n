@@ -3,6 +3,9 @@ layout: page
 permalink: /convolutional-networks/
 ---
 
+> 中文阅读：[本篇中文版](convolutional-networks.zh-CN.md)。英文原文保留供对照。
+
+
 Table of Contents:
 
 - [Architecture Overview](#overview)

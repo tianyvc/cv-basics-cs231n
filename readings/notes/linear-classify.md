@@ -3,6 +3,9 @@ layout: page
 permalink: /linear-classify/
 ---
 
+> 中文阅读：[本篇中文版](linear-classify.zh-CN.md)。英文原文保留供对照。
+
+
 Table of Contents:
 
 - [Linear Classification](#linear-classification)

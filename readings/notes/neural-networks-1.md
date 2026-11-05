@@ -3,6 +3,9 @@ layout: page
 permalink: /neural-networks-1/
 ---
 
+> 中文阅读：[本篇中文版](neural-networks-1.zh-CN.md)。英文原文保留供对照。
+
+
 Table of Contents:
 
 - [Quick intro without brain analogies](#quick)

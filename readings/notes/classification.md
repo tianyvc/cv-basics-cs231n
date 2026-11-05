@@ -4,6 +4,9 @@ mathjax: true
 permalink: /classification/
 ---
 
+> 中文阅读：[本篇中文版](classification.zh-CN.md)。英文原文保留供对照。
+
+
 This is an introductory lecture designed to introduce people from outside of Computer Vision to the Image Classification problem, and the data-driven approach. The Table of Contents:
 
 - [Image Classification](#image-classification)

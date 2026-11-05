@@ -3,6 +3,9 @@ layout: page
 permalink: /neural-networks-case-study/
 ---
 
+> 中文阅读：[本篇中文版](neural-networks-case-study.zh-CN.md)。英文原文保留供对照。
+
+
 Table of Contents:
 
 - [Generating some data](#data)

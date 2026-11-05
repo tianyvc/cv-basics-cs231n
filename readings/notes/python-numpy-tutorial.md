@@ -1,3 +1,6 @@
+
+> 中文阅读：[本篇中文版](python-numpy-tutorial.zh-CN.md)。英文原文保留供对照。
+
  
 
 ---

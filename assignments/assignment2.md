@@ -5,6 +5,9 @@ mathjax: true
 permalink: /assignments2025/assignment2/
 ---
 
+> 中文阅读：[本作业中文版](assignment2.zh-CN.md)。英文原文保留供对照。
+
+
 > 本地学习补充（2026-10-28）：解压后的 Notebook 已替换 Colab 初始化。请按 [本地实验与存储管理](../docs/本地实验与存储管理.md) 运行；下文保留官方历史说明，不需要照做 Drive 挂载或云端提交。
 
 
