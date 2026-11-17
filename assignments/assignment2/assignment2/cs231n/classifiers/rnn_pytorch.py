@@ -138,7 +138,14 @@ class CaptioningRNN:
         #                                                                          #
         # You also don't have to implement the backward pass.                      #
         ############################################################################
-        # 
+        h0 = features @ W_proj + b_proj
+        x_embed = W_embed[captions_in]
+        if self.cell_type == "rnn":
+            h = rnn_forward(x_embed, h0, Wx, Wh, b)
+        else:
+            h = lstm_forward(x_embed, h0, Wx, Wh, b)
+        scores = h @ W_vocab + b_vocab
+        loss = temporal_softmax_loss(scores, captions_out, mask)
         ############################################################################
         #                             END OF YOUR CODE                             #
         ############################################################################
@@ -202,7 +209,28 @@ class CaptioningRNN:
         # NOTE: we are still working over minibatches in this function. Also if   #
         # you are using an LSTM, initialize the first cell state to zeros.        #
         ###########################################################################
-        # 
+        h = features @ W_proj + b_proj
+        if self.cell_type == "lstm":
+            c = torch.zeros_like(h)
+
+        current_word = torch.full((N,), self._start, dtype=torch.long, device=features.device)
+
+        for t in range(max_length):
+            # Step 1: Embed the previous word
+            x_embed = W_embed[current_word]
+
+            # Step 2: Make an RNN step
+            if self.cell_type == "rnn":
+                h = rnn_step_forward(x_embed, h, Wx, Wh, b)
+            else:
+                h, c = lstm_step_forward(x_embed, h, c, Wx, Wh, b)
+
+            # Step 3: Compute scores for all words in the vocabulary
+            scores = h @ W_vocab + b_vocab
+
+            # Step 4: Select the word with the highest score
+            current_word = torch.argmax(scores, dim=1)
+            captions[:, t] = current_word
         ############################################################################
         #                             END OF YOUR CODE                             #
         ############################################################################
