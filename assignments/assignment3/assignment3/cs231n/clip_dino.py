@@ -1,10 +1,10 @@
 import torch
 import torch.nn as nn
 import numpy as np
-import clip
+#import clip
 from PIL import Image
 from torchvision import transforms as T
-import cv2
+#import cv2
 from tqdm.auto import tqdm
 
 
@@ -24,7 +24,13 @@ def get_similarity_no_loop(text_features, image_features):
     ############################################################################
     # TODO: Compute the cosine similarity. Do NOT use for loops.               #
     ############################################################################
+    text_norm = torch.norm(text_features, p=2, dim=1, keepdim=True)   # (N,1)
+    image_norm = torch.norm(image_features, p=2, dim=1, keepdim=True) # (M,1)
 
+    text_normalized = text_features / text_norm
+    image_normalized = image_features / image_norm
+
+    similarity = text_normalized @ image_normalized.T
     ############################################################################
     #                             END OF YOUR CODE                             #
     ############################################################################
